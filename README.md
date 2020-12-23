@@ -7,6 +7,8 @@
 * 4、点击启动.bat
 * 登录微信后崩了重新点击“启动.bat”试试
 
+[![GitHub stars](https://img.shields.io/github/stars/sfyc23/EverydayWechat.svg?style=social)](https://github.com/sfyc23/EverydayWechat/stargazers)     [![GitHub forks](https://img.shields.io/github/forks/sfyc23/EverydayWechat.svg?style=social)](https://github.com/sfyc23/EverydayWechat/network/members)  `请点击页面顶部靠右 star 与 fork 延伸功能`
+
 ## 图灵机器人和腾讯机器人可自行申请，腾讯机器人申请之后记得给几人添加闲聊功能和图片识别
 * [http://www.turingapi.com](图灵机器人)
 * [https://ai.qq.com](腾讯开放平台，腾讯机器人)
