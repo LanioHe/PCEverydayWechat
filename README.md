@@ -3,7 +3,7 @@
 
 
 1、安装目录下的 WeChatSetup.2.8.0.133.exe 且不要升级
-2、安装目录下的Python
+2、安装目录下的Python或自行下载Python 3.5以上
 3、点击启动.bat
 
 ## 支持的环境配置
