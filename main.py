@@ -1,15 +1,15 @@
-
-app_id='2160467528'               # 修改成自己的腾讯AI的APPid  
-app_key='5p949pxgOh7oklhW'        # 修改成自己的腾讯AI的APPkey  
-# 腾讯API经常返回空且不够智能的时候尝试调用图灵，可填多个，因为图灵基本版本一个每天只能调用100
+# 腾讯机器人的key
+app_id='2160467528'               # 修改成自己的腾讯机器人的APPid
+app_key='5p949pxgOh7oklhW'        # 修改成自己的腾讯机器人的APPkey
+# 腾讯机器人经常返回空且不够智能的时候尝试调用图灵机器人，
+# 可不填或填多个，因为图灵基本版本一个每天只能调用100
 apikey_arr = ['6866e20ce6724adc99105dc801c2f860', 'cccc89863cd548668e79e6becdf01ed9'] # 修改成自己的图灵key
 apikey_arr_index = 0
-stupid_reply = "emmmm，我不是很懂你的意思" # 当无法获取AI回复时的默认回复
+stupid_reply = 'emmmm，我不是很懂你的意思' # 当无法获取AI回复时的默认回复
+reply_suffix = '[自动回复]'
 
 import time, logging, random, requests
 from PyWeChatSpy import WeChatSpy
-                                               
-###api.py###
 import hashlib
 import time
 import requests
@@ -19,7 +19,8 @@ from urllib.parse import quote
 from qqai.vision.picture import ImgToText
 import re
 from qqai import ImgToText
-robot = ImgToText('2160467528', '5p949pxgOh7oklhW')
+
+robot = ImgToText(app_id, app_key)
 
 def curlmd5(src):
     m = hashlib.md5(src.encode('UTF-8'))
@@ -55,28 +56,26 @@ def get_content(plus_item):
     result=r.json()["data"]["answer"]
     return result  
 
-
-# 机器人返回消息
-isLoaded = 0;
+# 图灵机器人返回消息
 def reply_msg(receive_msg):
-    global isLoaded
     global apikey_arr
     global apikey_arr_index
-    apikey = apikey_arr[apikey_arr_index];
+    if bool(apikey_arr) == False or apikey_arr_index > (len(apikey_arr) - 1):
+        return stupid_reply
+    apikey = apikey_arr[apikey_arr_index]
     apiurl = 'http://www.tuling123.com/openapi/api?key=%s&info=%s' % (apikey, receive_msg)
     result = requests.get(apiurl)
     result.encoding = 'utf-8'
     data = result.json()
     returnTxt = data['text']
     if returnTxt == '亲爱的，当天请求次数已用完。' and apikey_arr_index < len(apikey_arr) - 1:
-        apikey_arr_index++
+        apikey_arr_index += 1
         returnTxt = reply_msg(receive_msg)
     else:
         returnTxt = stupid_reply
     return returnTxt
 
 def auto_reply(msg):
-    global isLoaded
     answer=get_content(msg)
     print(msg)
     if answer=='':                                 #防止返回内容为空
@@ -87,11 +86,9 @@ def auto_reply(msg):
                 break
             else:
                 answer = stupid_reply
-    if answer == stupid_reply and isLoaded != 2:
+    if answer == stupid_reply:
         answer = reply_msg(msg)
-    if isLoaded == 2:
-        answer = stupid_reply
-    return answer + '[自动回复]'
+    return answer + reply_suffix
 
 def auto_replyEmoji(msg):
     data = robot.run(msg)
@@ -105,7 +102,7 @@ def auto_replyEmoji(msg):
                 break
             else:
                 answer = stupid_reply
-    return answer + '[自动回复]'
+    return answer + reply_suffix
 
 def lets_fuck_it(content):
     img_url_pattern = r'.+? cdnurl = "(\S+)"' #img_url的正则式
@@ -126,11 +123,11 @@ def parser(data):
             spy.send_text(wx_ID, auto_reply(data.get('content')))  # 在此，你可以根据需要来设置消息的内容
         elif not data.get('chatroom_ID') and data.get('self') == 0 and data.get('msg_type') == 3:
             wx_ID = data.get('wx_ID')  # 好友消息
-            spy.send_text(wx_ID, '图片……' + stupid_reply + '[自动回复]')  # 在此，你可以根据需要来设置消息的内容
+            spy.send_text(wx_ID, '图片……' + stupid_reply + reply_suffix)  # 在此，你可以根据需要来设置消息的内容
         elif not data.get('chatroom_ID') and data.get('self') == 0 and data.get('msg_type') == 47:
             wx_ID = data.get('wx_ID')  # 好友消息
-            # url = lets_fuck_it(data.get('content'))
-            spy.send_text(wx_ID, stupid_reply + '[自动回复]') 
+            url = lets_fuck_it(data.get('content'))
+            spy.send_text(wx_ID, auto_replyEmoji(url[0]) + reply_suffix)
     # 获取个人信息
     elif data.get("type") == 2:
         print(data)
