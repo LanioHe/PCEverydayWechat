@@ -1,7 +1,8 @@
 # wechatAutoReply
-* 电脑微信AI自动回复防撤回
+* 电脑客户端微信AI自动回复防撤回
 * 简单易用无需编程知识
 * 主要为了自用和延伸方便
+* 如果可以登陆网页版微信，可移步至[EverydayWechat](https://github.com/sfyc23/EverydayWechat)
 
 ## 简单安装
 * 1、安装目录下的电脑微信“WeChatSetup.2.8.0.133”且不要升级
