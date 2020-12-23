@@ -1,13 +1,19 @@
 # wechatAutoReply
-电脑微信AI自动回复，简单易用无需编程知识
+电脑微信AI自动回复
+简单易用无需编程知识
+主要为了自用和延伸方便
 
-* 1、安装目录下的电脑微信 WeChatSetup.2.8.0.133.exe 且不要升级
-* 2、安装目录下的Python或自行下载Python 3.5以上，记得勾选添加环境变量，看不懂的就都勾选即可
-* 3、点击安装requirements.bat
-* 4、点击启动.bat
+* 1、安装目录下的电脑微信“WeChatSetup.2.8.0.133.exe”且不要升级
+* 2、安装目录下的“python-3.7.0-amd64.exe”或自行下载Python 3.5以上，记得勾选添加环境变量，看不懂的就都勾选即可
+* 3、点击安装“requirements.bat”
+* 4、点击“启动.bat”
 * 登录微信后崩了重新点击“启动.bat”试试
 
 [![GitHub stars](https://img.shields.io/github/stars/LanioHe/wechatAutoReply.svg?style=social)](https://github.com/LanioHe/wechatAutoReply/stargazers)     [![GitHub forks](https://img.shields.io/github/forks/LanioHe/wechatAutoReply.svg?style=social)](https://github.com/LanioHe/wechatAutoReply/network/members)  `请点击页面顶部靠右 star 与 fork 延伸功能`
+
+## 微信消息防撤回
+* 将目录下的“WeChatWin.dll”替换微信安装目录下相应文件
+* 取自网络，对应的作者已经找不到，感谢
 
 ## 图灵机器人和腾讯机器人可自行申请，腾讯机器人申请之后记得给几人添加闲聊功能和图片识别
 * [http://www.turingapi.com](图灵机器人)
