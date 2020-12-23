@@ -1,0 +1,7 @@
+build
+.idea
+dist
+PyWeChatSpy.egg-info
+*.log
+*.xor
+__pycache__/
