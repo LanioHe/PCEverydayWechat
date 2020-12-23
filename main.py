@@ -51,8 +51,7 @@ def get_content(plus_item):
     url = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_textchat"         # 聊天的API地址  
     plus_item = plus_item.encode('utf-8')
     payload = get_params(plus_item)
-    r = requests.post(url,data=payload)  
-    print(r.json())                                               #带参请求api地址
+    r = requests.post(url,data=payload)
     result=r.json()["data"]["answer"]
     return result  
 
@@ -77,7 +76,6 @@ def reply_msg(receive_msg):
 
 def auto_reply(msg):
     answer=get_content(msg)
-    print(msg)
     if answer=='':                                 #防止返回内容为空
         for i in range(2):                     
             time.sleep(3)
