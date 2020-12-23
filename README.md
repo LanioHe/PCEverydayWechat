@@ -16,4 +16,4 @@
 ## 核心文件WeChatSpy.dll的开发源代码(C++)地址
 * [https://github.com/MaoningGuan/WeChatSpy](https://github.com/MaoningGuan/WeChatSpy)
 ## 引用项目PyWeChat，查看数据详情
-* [https://github.com/MaoningGuan/PyWeChat/)
+* [https://github.com/MaoningGuan/PyWeChat](https://github.com/MaoningGuan/PyWeChat)
