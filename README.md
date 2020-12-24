@@ -6,9 +6,8 @@
 ## 简单安装
 * 1、安装目录下的电脑微信“WeChatSetup.2.8.0.133”且不要升级
 * 2、安装目录下的“python-3.7.0-amd64”或自行下载Python3.5以上，勾选添加环境变量，看不懂就都勾选即可
-* 3、点击安装“requirements.bat”
-* 4、点击“启动.bat”
-* 登录微信后崩了重新点击“启动.bat”试试
+* 3、点击“启动.bat”
+* 登录微信后崩了关了命令窗口重新点击“启动.bat”试试
 
 [![GitHub stars](https://img.shields.io/github/stars/LanioHe/wechatAutoReply.svg?style=social)](https://github.com/LanioHe/wechatAutoReply/stargazers)     [![GitHub forks](https://img.shields.io/github/forks/LanioHe/wechatAutoReply.svg?style=social)](https://github.com/LanioHe/wechatAutoReply/network/members)  `请点击页面顶部靠右 star 与 fork 延伸功能`
 
