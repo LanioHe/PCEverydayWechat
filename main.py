@@ -104,11 +104,16 @@ def auto_replyEmoji(msg):
 
 # 识别图片URL
 def lets_fuck_it(content):
-    img_url_pattern = r'.+?*cdnurl\s*=\s*"(\S+)"' #img_url的正则式
-    need_replace_list = re.findall(img_url_pattern, content)#找到所有的img标签
-    return need_replace_list
+    url_list = re.findall('.+?cdnurl\s*=\s*"(\S+)"', content)
+    return url_list
 
+inited = 0
 def parser(data):
+    global inited
+    # 减少初始化大量信息导致崩溃
+    if inited == 0:
+        time.sleep(3)
+        inited = 1
     # 获取文本信息
     if data.get("type") == 1:
         # spy.query_personal_info()  # 获取登录账号的个人信息
@@ -125,7 +130,10 @@ def parser(data):
         elif not data.get('chatroom_ID') and data.get('self') == 0 and data.get('msg_type') == 47:
             wx_ID = data.get('wx_ID')  # 好友消息
             url = lets_fuck_it(data.get('content'))
-            spy.send_text(wx_ID, auto_replyEmoji(url[0]) + reply_suffix)
+            if url:
+                spy.send_text(wx_ID, auto_replyEmoji(url[0]))
+            else:
+                spy.send_text(wx_ID, stupid_reply + reply_suffix)
     # 获取个人信息
     elif data.get("type") == 2:
         print(data)
