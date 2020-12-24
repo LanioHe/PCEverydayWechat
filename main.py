@@ -70,8 +70,6 @@ def reply_msg(receive_msg):
     if returnTxt == '亲爱的，当天请求次数已用完。' and apikey_arr_index < len(apikey_arr) - 1:
         apikey_arr_index += 1
         returnTxt = reply_msg(receive_msg)
-    else:
-        returnTxt = stupid_reply
     return returnTxt
 
 def auto_reply(msg):
