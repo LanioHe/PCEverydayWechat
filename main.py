@@ -25,14 +25,14 @@ robot = ImgToText(app_id, app_key)
 def curlmd5(src):
     m = hashlib.md5(src.encode('UTF-8'))
     return m.hexdigest().upper()               # 将得到的MD5值所有字符转换成大写
- 
+
 def get_params(plus_item):                    #用于返回request需要的data内容
     global params
     global app_id
     global app_key
     t = time.time()                                             #请求时间戳（秒级）,（保证签名5分钟有效）
     time_stamp=str(int(t))
-    nonce_str = ''.join(random.sample(string.ascii_letters + string.digits, 10))            # 请求随机字符串，用于保证签名不可预测  
+    nonce_str = ''.join(random.sample(string.ascii_letters + string.digits, 10))            # 请求随机字符串，用于保证签名不可预测
     params = {'app_id':app_id,
               'question':plus_item,
               'time_stamp':time_stamp,
@@ -45,15 +45,15 @@ def get_params(plus_item):                    #用于返回request需要的data�
     sign = curlmd5(sign_before)
     params['sign'] = sign                                 # 对sign_before进行MD5运算
     return params                                              #得到request需要的data内容
- 
+
 def get_content(plus_item):
     global payload,r
-    url = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_textchat"         # 聊天的API地址  
+    url = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_textchat"         # 聊天的API地址
     plus_item = plus_item.encode('utf-8')
     payload = get_params(plus_item)
     r = requests.post(url,data=payload)
     result=r.json()["data"]["answer"]
-    return result  
+    return result
 
 # 图灵机器人返回消息
 def reply_msg(receive_msg):
@@ -77,7 +77,7 @@ def reply_msg(receive_msg):
 def auto_reply(msg):
     answer=get_content(msg)
     if answer=='':                                 #防止返回内容为空
-        for i in range(2):                     
+        for i in range(2):
             time.sleep(3)
             answer=get_content(msg)
             if answer != '' and answer != stupid_reply:
@@ -92,7 +92,7 @@ def auto_replyEmoji(msg):
     data = robot.run(msg)
     answer = data.get('data').get('text')
     if answer=='':                                 #防止返回内容为空
-        for i in range(2):                     
+        for i in range(2):
             time.sleep(2)
             data = robot.run(msg)
             answer = data.get('data').get('text')
@@ -102,12 +102,12 @@ def auto_replyEmoji(msg):
                 answer = stupid_reply
     return answer + reply_suffix
 
-def lets_fuck_it(content):
-    img_url_pattern = r'.+? cdnurl = "(\S+)"' #img_url的正则式
-    need_replace_list = re.findall(img_url_pattern, content)#找到所有的img标签
-    return need_replace_list;
-
 # 识别图片URL
+def lets_fuck_it(content):
+    img_url_pattern = r'.+?.*cdnurl.*=.*"(\S+)"' #img_url的正则式
+    need_replace_list = re.findall(img_url_pattern, content)#找到所有的img标签
+    return need_replace_list
+
 def parser(data):
     # 获取文本信息
     if data.get("type") == 1:
