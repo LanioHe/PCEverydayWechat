@@ -104,7 +104,7 @@ def auto_replyEmoji(msg):
 
 # 识别图片URL
 def lets_fuck_it(content):
-    img_url_pattern = r'.+?.*cdnurl.*=.*"(\S+)"' #img_url的正则式
+    img_url_pattern = r'.+?*cdnurl\s*=\s*"(\S+)"' #img_url的正则式
     need_replace_list = re.findall(img_url_pattern, content)#找到所有的img标签
     return need_replace_list
 
