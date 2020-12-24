@@ -121,7 +121,7 @@ def parser(data):
             # 获取微信群idspy.send_text(chatroom_ID, '微信群消息自动回复测试！')  在此，你可以根据需要来设置消息的内容
         elif not data.get('chatroom_ID') and data.get('self') == 0 and data.get('msg_type') == 1:
             wx_ID = data.get('wx_ID')  # 好友消息
-            spy.send_text(wx_ID, auto_reply(data.get('content')))  # 在此，你可以根据需要来设置消息的内容
+            spy.send_text(wx_ID, auto_reply(data.get('content')[0:200]))  # 在此，你可以根据需要来设置消息的内容
         elif not data.get('chatroom_ID') and data.get('self') == 0 and data.get('msg_type') == 3:
             wx_ID = data.get('wx_ID')  # 好友消息
             spy.send_text(wx_ID, '图片……' + stupid_reply + reply_suffix)  # 在此，你可以根据需要来设置消息的内容
